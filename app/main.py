@@ -14,7 +14,10 @@ from app.domain.exceptions import (
 logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Book Management System")
+from app.api.routes import admin, auth, books
+app.include_router(auth.router)
 app.include_router(books.router)
+app.include_router(admin.router)
 
 
 @app.exception_handler(BookNotFoundError)

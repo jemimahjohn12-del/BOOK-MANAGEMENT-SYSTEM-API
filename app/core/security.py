@@ -29,5 +29,9 @@ def create_access_token(user_id: int) -> str:
 
 
 def decode_access_token(token: str) -> dict:
-    # Raises an error if the token is fake, changed, or expired
-    return jwt.decode(token, config.JWT_SECRET, algorithms=[config.JWT_ALGORITHM])
+    return jwt.decode(
+        token,
+        config.JWT_SECRET,
+        algorithms=[config.JWT_ALGORITHM],
+        options={"require": ["exp", "sub"]},
+    )
